@@ -36,7 +36,7 @@ func GetFeatureMap() []byte {
 	return apiResp.Features
 }
 
-func Gbook() *growthbook.GrowthBook {
+func Gbook(id string) *growthbook.GrowthBook {
 
 	featureMap := GetFeatureMap()
 	features := growthbook.ParseFeatureMap(featureMap)
@@ -45,7 +45,7 @@ func Gbook() *growthbook.GrowthBook {
 		WithFeatures(features).
 		// TODO: Real user attributes
 		WithAttributes(growthbook.Attributes{
-			"id":       "foo",
+			"id":       id,
 			"deviceId": "foo",
 			"company":  "foo",
 			"loggedIn": true,
@@ -56,8 +56,10 @@ func Gbook() *growthbook.GrowthBook {
 		}).
 		// TODO: Track in your analytics system
 		WithTrackingCallback(func(experiment *growthbook.Experiment, result *growthbook.ExperimentResult) {
+
 			log.Println(fmt.Sprintf("Experiment: %s, Variation: %d", experiment.Key, result.VariationID))
 		})
+
 	gb := growthbook.New(context)
 	return gb
 }

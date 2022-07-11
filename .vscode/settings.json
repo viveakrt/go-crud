@@ -1,0 +1,9 @@
+{
+    "cSpell.words": [
+        "Gbook",
+        "growthbook",
+        "Imdb",
+        "Tmdb"
+    ],
+    "python.formatting.provider": "yapf"
+}

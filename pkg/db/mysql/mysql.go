@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"myapp/config"
 	"os"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var DB *sql.DB
@@ -25,8 +27,9 @@ func CreateClient() {
 	DB = db
 
 	pingErr := DB.Ping()
+
 	if pingErr != nil {
-		fmt.Println(dbErr)
+		fmt.Println(dbErr, pingErr)
 		os.Exit(1)
 	}
 
